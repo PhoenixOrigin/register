@@ -1,4 +1,4 @@
-name: ID_ADDER 
+name: ID_ADDER  
 on: [pull_request]
 
 jobs:
@@ -10,16 +10,14 @@ jobs:
           ref: ${{ github.event.pull_request.head.sha }}
           persist-credentials: false
           fetch-depth: 0
-      - uses: phoenixorigin/id_script@v0.1.11
+      - id: files
+        uses: jitterbit/get-changed-files@v1
         with:
-          files: ${{ steps.abc.outputs.all }}
-      - run: echo "${{ steps.abc.outputs.all }}"
-      - name: Push changes to PR branch
-        run: |
-          git config --global user.name "GitHub Actions"
-          git config --global user.email "actions@github.com"
-          git add .
-          git commit -m "Auto-commit from GitHub Actions"
-          git push origin HEAD:${{ github.head_ref }}
-        env:
-          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+          format: 'space-delimited'
+      - uses: phoenixorigin/id_script@v0.1
+        with:
+          files: ${{ steps.files.outputs.all }}
+      - uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: ${{ github.ref }}
