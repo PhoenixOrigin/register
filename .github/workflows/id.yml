@@ -17,8 +17,8 @@ jobs:
       - uses: phoenixorigin/id_script@v0.1.11
         with:
           files: ${{ steps.files.outputs.all }}
-      - uses: ad-m/github-push-action@master
+      - uses: stefanzweifel/git-auto-commit-action@v4
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: ${{ github.ref }}
-          ref: ${{ github.event.pull_request.head.sha }}
+          commit_user_name: 'update'
+          commit_user_email: 'sohelpmegodifthisdoesntwork@gmail.com'
+          commit_message: 'update'
