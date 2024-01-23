@@ -10,7 +10,7 @@ jobs:
           ref: ${{ github.event.pull_request.head.sha }}
           persist-credentials: false
           fetch-depth: 0
-      - uses: phoenixorigin/id_script@v0.1.3
+      - uses: phoenixorigin/id_script@v0.1.4
         with:
           files: ${{ steps.abc.outputs.all }}
       - uses: ad-m/github-push-action@master
