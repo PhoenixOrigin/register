@@ -13,6 +13,7 @@ jobs:
       - uses: phoenixorigin/id_script@v0.1.11
         with:
           files: ${{ steps.abc.outputs.all }}
+      - run: echo "${{ steps.abc.outputs.all }}"
       - uses: ad-m/github-push-action@master
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
