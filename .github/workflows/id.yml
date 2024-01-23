@@ -14,7 +14,12 @@ jobs:
         with:
           files: ${{ steps.abc.outputs.all }}
       - run: echo "${{ steps.abc.outputs.all }}"
-      - uses: ad-m/github-push-action@master
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: ${{ github.ref }}
+      - name: Push changes to PR branch
+        run: |
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
+          git add .
+          git commit -m "Auto-commit from GitHub Actions"
+          git push origin HEAD:${{ github.head_ref }}
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
