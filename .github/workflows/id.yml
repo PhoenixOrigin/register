@@ -1,5 +1,5 @@
 name: ID_ADDER  
-on: [push]
+on: [pull_request]
 
 jobs:
   id:
@@ -20,4 +20,4 @@ jobs:
         with:
           commit_user_name: 'GitHub Actions'
           commit_user_email: 'actions@github.co'
-          commit_message: 'chore: update domains id'
+          commit_message: 'chore: update user id'
