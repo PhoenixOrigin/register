@@ -17,11 +17,8 @@ jobs:
       - uses: phoenixorigin/id_script@v0.1.17
         with:
           files: ${{ steps.files.outputs.all }}
-      - run: echo ${{ steps.files.outputs.all }} 
-      - name: Commit
-        run: |
-          git config --local user.email "actions@github.com"
-          git config --local user.name "GitHub Actions"
-          git add .
-          git commit -m "chore: update domains id"
-          git push
+      - uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_user_name: 'GitHub Actions'
+          commit_user_email: 'actions@github.co'
+          commit_message: 'chore: update domains id'
