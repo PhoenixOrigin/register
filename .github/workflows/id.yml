@@ -7,16 +7,12 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: ${{ github.event.pull_request.head.sha }}
-          persist-credentials: false
           fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
       - id: files
         uses: jitterbit/get-changed-files@v1
         with:
           format: 'space-delimited'
-      - name: Set default branch.
-        run: git remote set-head origin --auto
-        shell: bash
       - uses: phoenixorigin/id_script@v0.1.17
         with:
           files: ${{ steps.files.outputs.all }}
