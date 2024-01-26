@@ -7,18 +7,17 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: ${{ github.event.pull_request.head.sha }}
-          persist-credentials: false
           fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
       - id: files
         uses: jitterbit/get-changed-files@v1
         with:
           format: 'space-delimited'
-      - uses: phoenixorigin/id_script@v0.1
+      - uses: phoenixorigin/id_script@v0.1.17
         with:
           files: ${{ steps.files.outputs.all }}
-      - run: echo ${{ steps.files.outputs.all }} 
-      - uses: ad-m/github-push-action@master
+      - uses: stefanzweifel/git-auto-commit-action@v4
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: ${{ github.ref }}
+          commit_user_name: 'GitHub Actions'
+          commit_user_email: 'actions@github.co'
+          commit_message: 'chore: update user id'
